@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField
+    slug = models.SlugField()
 
     class Meta:
         ordering = ('name',)
@@ -22,7 +22,7 @@ class Category(models.Model):
 class Card(models.Model):
     category = models.ForeignKey(Category, related_name='cards', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    slug = models.SlugField
+    slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='uploads', blank=True, null=True)
@@ -63,7 +63,7 @@ class Card(models.Model):
         # Gave it a default size
         img.thumbnail(size)
         # Stream to locally
-        thumb_io = BytesIO
+        thumb_io = BytesIO()
         # saving the image
         img.save(thumb_io, 'JPEG', quality=85)
         # updating the thumbnail

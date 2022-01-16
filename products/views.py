@@ -3,7 +3,7 @@ from .models import Card, Category
 from .serializers import CardSerializer
 
 from rest_framework.views import APIView
-from rest_framework.response import responses
+from rest_framework.response import Response
 
 
 # Using class to get data list
@@ -14,4 +14,4 @@ class LatestCardList(APIView):
         # creating a variable and  passing the objects query through serializer
         serializer = CardSerializer(cards, many=True)
         # returning a response with the serializer variable
-        return responses(serializer.data)
+        return Response(serializer.data)
