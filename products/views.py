@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from .models import Card, Category
 from .serializers import CardSerializer
@@ -14,4 +15,17 @@ class LatestCardList(APIView):
         # creating a variable and  passing the objects query through serializer
         serializer = CardSerializer(cards, many=True)
         # returning a response with the serializer variable
+        return Response(serializer.data)
+
+
+class CardDetail(APIView):
+    def get_object(self, card_slug, category_slug):
+        try:
+            return Card.objects.filter(category_slug=category_slug).get(slug=card_slug)
+        except Card.DoesNotExist:
+            raise Http404
+
+    def get(self, card_slug, category_slug, format=None):
+        cards = Card.objects.get(category_slug, card_slug)
+        serializer = CardSerializer(cards)
         return Response(serializer.data)
