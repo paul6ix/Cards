@@ -47,10 +47,12 @@ export default {
     getCards() {
       const card_slug = this.$route.params.card_slug
       const category_slug = this.$route.params.category_slug
+      console.log(category_slug)
       axios
           .get(`/api/v1/card/${category_slug}/${card_slug}`)
           .then(response => {
             this.card = response.data
+            console.log(response.data)
           })
           .catch(error => {
             console.log(error)

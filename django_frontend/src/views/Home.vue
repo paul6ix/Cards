@@ -25,7 +25,7 @@
           </figure>
           <h3 class="is-size-4">{{ card.name }}</h3>
           <p class="is-size-6 has-text-grey">{{ card.price }}</p>
-          <router-link :to="card.get_absolute_url" class="button is-dark mt-4">View details</router-link>
+          <router-link v-bind:to="card.get_absolute_url" class="button is-dark mt-4">View details</router-link>
 
         </div>
 

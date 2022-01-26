@@ -5,6 +5,7 @@ from .serializers import CardSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import viewsets
 
 
 # Using class to get data list
@@ -19,13 +20,13 @@ class LatestCardList(APIView):
 
 
 class CardDetail(APIView):
-    def get_object(self, card_slug, category_slug):
+    def get_object(self, category, card):
         try:
-            return Card.objects.filter(category_slug=category_slug).get(slug=card_slug)
+            return Card.objects.filter(category__slug=category).get(slug=card)
         except Card.DoesNotExist:
             raise Http404
 
-    def get(self, card_slug, category_slug, format=None):
-        cards = Card.objects.get(category_slug, card_slug)
+    def get(self, request, card, category, format=None):
+        cards = self.get_object(category, card)
         serializer = CardSerializer(cards)
         return Response(serializer.data)
