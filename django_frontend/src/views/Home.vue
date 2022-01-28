@@ -18,16 +18,19 @@
           Top Cards
         </h2>
       </div>
-      <div class="column is-2 " v-for="card in recentCards" v-bind:key="card.id">
-        <div class="box">
+      <div class="row is-4 " v-for="card in recentCards" v-bind:key="card.id">
+        <div class="column">
+           <div class="box">
           <figure class="image mb-4">
             <img :src="card.get_thumbnail">
           </figure>
           <h3 class="is-size-4">{{ card.name }}</h3>
           <p class="is-size-6 has-text-grey">{{ card.price }}</p>
-          <router-link v-bind:to="card.get_absolute_url" class="button is-dark mt-4">View details</router-link>
+          <router-link :to="card.get_absolute_url" class="button is-dark mt-4">View details</router-link>
 
         </div>
+        </div>
+
 
       </div>
     </div>

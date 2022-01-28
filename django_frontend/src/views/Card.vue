@@ -45,22 +45,33 @@ export default {
   },
   methods: {
     getCards() {
-      const card_slug = this.$route.params.card_slug
-      const category_slug = this.$route.params.category_slug
-      console.log(category_slug)
+      const card = this.$route.params.card
+      const category = this.$route.params.category
+
       axios
-          .get(`/api/v1/card/${category_slug}/${card_slug}`)
+          .get(`/api/v1/card/${category}/${card}`)
           .then(response => {
             this.card = response.data
-            console.log(response.data)
+
           })
           .catch(error => {
             console.log(error)
           })
-
+    },
+      addToCart()
+      {
+        if (isNaN(this.quantity) || this.quantity < 1) {
+          this.quantity = 1
+        }
+        const item = {
+          card: this.card,
+          quantity: this.quantity
+        }
+        this.$store.commit('addToCart', item)
+      }
     }
   }
-}
+
 </script>
 
 <style scoped>

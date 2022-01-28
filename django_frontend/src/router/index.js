@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Card from "@/views/Card";
+import Card from "../views/Card";
 
 const routes = [
   {
@@ -17,8 +17,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/:category_slug/:card_slug',
-    name: 'Cards',
+    path: '/:category/:card',
+    name: 'Card',
     component: Card
   },
 ]
